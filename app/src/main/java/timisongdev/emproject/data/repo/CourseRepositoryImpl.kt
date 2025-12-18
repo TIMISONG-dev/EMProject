@@ -15,6 +15,7 @@ class CourseRepositoryImpl(
     private val favoriteDao: FavoriteDao
 ) : CourseRepository {
 
+    // Обработка courses через flow + подвязка room
     override suspend fun getCourses(): Flow<List<Course>> = flow {
         try {
             val response = api.getCourses()
@@ -35,6 +36,7 @@ class CourseRepositoryImpl(
         }
     }
 
+    // добавление favorite в room
     suspend fun toggleFavorite(courseId: Int, isFavorite: Boolean) {
         if (isFavorite) {
             favoriteDao.addToFavorite(CourseEntity(id = courseId))

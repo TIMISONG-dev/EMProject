@@ -7,6 +7,7 @@ import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 import timisongdev.emproject.domain.model.CourseEntity
 
+// Based SQL момент
 @Dao
 interface FavoriteDao {
 

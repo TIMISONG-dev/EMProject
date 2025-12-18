@@ -27,6 +27,7 @@ class MenuViewModel(
         loadCourses()
     }
 
+    // Загружаем курсы
     fun loadCourses() {
         viewModelScope.launch {
             _isLoading.value = true
@@ -38,6 +39,7 @@ class MenuViewModel(
         }
     }
 
+    // Добавление favorite
     fun toggleLike(courseId: Int) {
         viewModelScope.launch {
             val currentList = _originalCourses.value.orEmpty()
@@ -53,6 +55,7 @@ class MenuViewModel(
         }
     }
 
+    // Сортировка по датам
     fun sortByDate() {
         isSortedByDateDescending = !isSortedByDateDescending
         sortMode = when (sortMode) {
@@ -62,11 +65,13 @@ class MenuViewModel(
         applyFiltersAndSort()
     }
 
+    // поиск по титлку
     fun searchByTitle(query: String) {
         currentSearchQuery = query.trim()
         applyFiltersAndSort()
     }
 
+    // тут все жоска применяется
     private fun applyFiltersAndSort() {
         var list = _originalCourses.value.orEmpty()
 
@@ -83,6 +88,7 @@ class MenuViewModel(
     }
 }
 
+// Мод сортировки
 enum class SortMode {
     PUBLISH_DATE_DESC,
     PUBLISH_DATE_ASC,

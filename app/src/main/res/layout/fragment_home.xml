@@ -33,7 +33,7 @@
             android:layout_height="48dp"
             android:layout_marginStart="12dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Сортировка"
+            android:contentDescription="sort"
             android:src="@drawable/ic_filter" />
     </LinearLayout>
 

@@ -12,6 +12,7 @@ import timisongdev.emproject.data.repo.CourseRepositoryImpl
 import timisongdev.emproject.domain.repo.CourseRepository
 import timisongdev.emproject.presentation.MenuViewModel
 
+// Для получения инфы из gdrive
 val networkModule = module {
     single {
         Retrofit.Builder()
@@ -22,12 +23,14 @@ val networkModule = module {
     single { get<Retrofit>().create(CoursesApi::class.java) }
 }
 
+// Room
 val repositoryModule = module {
     single { CourseRepositoryImpl(get(), get()) }
 
     single<CourseRepository> { get<CourseRepositoryImpl>() }
 }
 
+// Koin ViewModel
 val viewModelModule = module {
     viewModel {
         MenuViewModel(
@@ -36,6 +39,7 @@ val viewModelModule = module {
     }
 }
 
+// Room
 val databaseModule = module {
     single {
         Room.databaseBuilder(

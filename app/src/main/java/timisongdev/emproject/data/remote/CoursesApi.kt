@@ -3,6 +3,7 @@ package timisongdev.emproject.data.remote
 import retrofit2.http.GET
 import timisongdev.emproject.domain.model.Course
 
+// все для retrofit & room
 interface CoursesApi {
     @GET("uc?id=15arTK7XT2b7Yv4BJsmDctA4Hg-BbS8-q&export=download")
     suspend fun getCourses(): CoursesResponse

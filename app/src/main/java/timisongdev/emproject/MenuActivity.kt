@@ -1,7 +1,6 @@
 package timisongdev.emproject
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import timisongdev.emproject.databinding.ActivityMenuBinding
 import timisongdev.emproject.presentation.FavFragment
@@ -16,12 +15,14 @@ class MenuActivity : AppCompatActivity() {
         binding = ActivityMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // сток фрагмент это home
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, HomeFragment())
                 .commit()
         }
 
+        // обработка navbar items
         binding.bottomNav.selectedItemId = R.id.nav_home
 
         binding.bottomNav.setOnItemSelectedListener { item ->

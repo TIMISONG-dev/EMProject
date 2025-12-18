@@ -1,5 +1,6 @@
 package timisongdev.emproject.presentation
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -21,6 +22,7 @@ class HomeFragment : Fragment() {
 
     private val viewModel: MenuViewModel by viewModel()
 
+    // Адаптер для RecyclerView
     private val adapter = ListDelegationAdapter(
         AdapterDelegatesManager<List<Course>>()
             .addDelegate(courseAdapterDelegate { courseId ->
@@ -36,12 +38,14 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
         binding.recycler.adapter = adapter
 
+        // SwipeRefresh обновляет список
         binding.swipeRefresh.setOnRefreshListener {
             viewModel.loadCourses()
         }
@@ -51,6 +55,7 @@ class HomeFragment : Fragment() {
             updateSortIcon()
         }
 
+        // Поиск по курсам
         binding.search.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -59,6 +64,7 @@ class HomeFragment : Fragment() {
             }
         })
 
+        // Чекаем список курсов из viewmodel
         viewModel.courses.observe(viewLifecycleOwner) { courses ->
             adapter.items = courses
             adapter.notifyDataSetChanged()
@@ -76,6 +82,7 @@ class HomeFragment : Fragment() {
         viewModel.loadCourses()
     }
 
+    // Если сортировка включена
     private fun updateSortIcon() {
         val icon = if (viewModel.isSortedByDateDescending) {
             R.drawable.ic_filter_alt

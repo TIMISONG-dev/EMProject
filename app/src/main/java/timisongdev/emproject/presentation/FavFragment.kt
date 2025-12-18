@@ -1,5 +1,6 @@
 package timisongdev.emproject.presentation
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +33,7 @@ class FavFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -39,6 +41,7 @@ class FavFragment : Fragment() {
         binding.recyclerFavorites.adapter = adapter
         binding.recyclerFavorites.clipToPadding = false
 
+        // Так же чекаем все курсы
         viewModel.courses.observe(viewLifecycleOwner) { allCourses ->
             val favoriteCourses = allCourses.filter { it.hasLike }
 
